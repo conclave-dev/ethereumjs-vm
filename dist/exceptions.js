@@ -9,7 +9,8 @@ var ERROR = {
   OUT_OF_RANGE: 'value out of range',
   REVERT: 'revert',
   STATIC_STATE_CHANGE: 'static state change',
-  INTERNAL_ERROR: 'internal error'
+  INTERNAL_ERROR: 'internal error',
+  INPUT_LENGTH: 'invalid input length'
 };
 
 function VmError(error) {

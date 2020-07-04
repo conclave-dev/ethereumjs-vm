@@ -17,4 +17,16 @@ module.exports = function (opts) {
     results.exception = 0;
     return results;
   }
+
+  // Validate length of input (a 32-byte integer representing the block number to access)
+  const expectedDataByteLength = 32;
+
+  // @Q: In the blockchain repo, an error is returned if the input length is *less than* 32,
+  // but shouldn't anything other than 32 be invalid? Since blockNumber is a 32-byte integer
+  if (opts.data.length < expectedDataByteLength) {
+    results.return = Buffer.alloc(0);
+    results.exception = 0;
+    results.exceptionError = error.INPUT_LENGTH;
+    return results;
+  }
 };
