@@ -30,17 +30,28 @@ module.exports = function (opts) {
   // but shouldn't anything other than 32 be invalid? Since blockNumber is a 32-byte integer
   if (opts.data.length < blockNumberInputLength) {
     results.return = Buffer.alloc(0);
-    results.exception = 0;
     results.exceptionError = error.INPUT_LENGTH;
+    results.exception = 10;
     return results;
   }
 
+  // Check if input block number is genesis
   // https://github.com/celo-org/celo-blockchain/blob/rc1/core/vm/contracts.go#L901
-  const blockNumberInput = new BN(utils.bufferToHex(opts.data), 16);
+  const blockNumberInput = new BN(opts.data.slice(0, 32));
 
-  // Genesis validator set is empty, return 0
   if (blockNumberInput.eq(0)) {
     results.return = Buffer.alloc(32);
+    return results;
+  }
+
+  // Check if input block number is out of bounds
+  // https://github.com/celo-org/celo-blockchain/blob/rc1/core/vm/contracts.go#L906
+  const currentBlockNumber = new BN(opts.block.header.number);
+
+  if (blockNumberInput.gt(currentBlockNumber)) {
+    results.return = Buffer.alloc(0);
+    results.exceptionError = error.BLOCK_NUMBER_OUT_OF_BOUNDS;
+    results.exception = 9;
     return results;
   }
 };

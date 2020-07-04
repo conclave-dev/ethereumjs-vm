@@ -10,6 +10,7 @@ var ERROR = {
   REVERT: 'revert',
   STATIC_STATE_CHANGE: 'static state change',
   INTERNAL_ERROR: 'internal error',
+  BLOCK_NUMBER_OUT_OF_BOUNDS: 'block number out of bounds',
   INPUT_LENGTH: 'invalid input length'
 };
 
