@@ -10,6 +10,7 @@ import { default as p7 } from './07-ecmul'
 import { default as p8 } from './08-ecpairing'
 import { default as p9 } from './09-blake2f'
 import { default as pf8 } from './f8-epochsize'
+import { default as pf9 } from './f9-numbervalidators'
 import { default as pfc } from './fc-fractionmulexp'
 import { default as pfd } from './fd-transfer'
 
@@ -39,6 +40,7 @@ const precompiles: Precompiles = {
   '0000000000000000000000000000000000000008': toAsync(p8),
   '0000000000000000000000000000000000000009': toAsync(p9),
   '00000000000000000000000000000000000000f8': toAsync(pf8),
+  '00000000000000000000000000000000000000f9': toAsync(pf9),
   '00000000000000000000000000000000000000fc': toAsync(pfc),
   '00000000000000000000000000000000000000fd': pfd,
 }

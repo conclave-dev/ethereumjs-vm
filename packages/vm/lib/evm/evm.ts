@@ -349,6 +349,8 @@ export default class EVM {
       gasLimit,
       _common: this._vm._common,
       _state: this._state,
+      _block: this._block,
+      _blockchain: this._vm.blockchain,
     }
 
     return code(opts)
